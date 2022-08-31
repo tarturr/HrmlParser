@@ -9,7 +9,10 @@
 class TagAttributes
 {
 public:
-    TagAttributes(std::vector<std::string> hrml, std::vector<std::string> queries) noexcept;
+    explicit TagAttributes(std::vector<std::string> hrml) noexcept;
+
+    const std::string& name() const noexcept;
+    std::unordered_map<std::string, std::string> attributes() const noexcept;
 private:
     std::string m_name;
     std::unordered_map<std::string, std::string> m_attributes;

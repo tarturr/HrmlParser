@@ -3,10 +3,11 @@
 #include <array>
 #include <algorithm>
 #include <sstream>
+#include <iostream>
 
 namespace Utils
 {
-    template<size_t N>
+    template<std::size_t N>
     std::string clean(const std::string& str, const std::array<char, N>& to_clean = {})
     {
         if constexpr (N > 0)
@@ -50,13 +51,25 @@ namespace Utils
 
         while (find != end)
         {
-            splitted.emplace_back(begin, find);
+            std::string current { begin, find };
+            if (!current.empty()) splitted.emplace_back(std::move(current));
 
             begin = find + 1;
+
+            if (*begin == '"')
+            {
+                begin++;
+                find = std::find(begin, end, '"');
+                current = { begin, find };
+                if (!current.empty()) splitted.emplace_back(std::move(current));
+                begin = find + 1;
+            }
+
             find = std::find(begin, end, delimiter);
         }
 
-        splitted.emplace_back(begin, end);
+        std::string last { begin, end };
+        if (!last.empty()) splitted.emplace_back(std::move(last));
 
         return splitted;
     }

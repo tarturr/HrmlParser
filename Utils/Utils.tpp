@@ -6,7 +6,7 @@
 
 namespace Utils
 {
-    template<std::size_t N>
+    template<std::size_t N = 0>
     std::string clean(const std::string& str, const std::array<char, N>& to_clean = {})
     {
         if constexpr (N > 0)
@@ -36,7 +36,7 @@ namespace Utils
         return "";
     }
 
-    template<std::size_t N>
+    template<std::size_t N = 0>
     std::vector<std::string> split(std::string str, const std::array<char, N>& ignore = {}, char delimiter = ' ') noexcept
     {
         if constexpr (N > 0)

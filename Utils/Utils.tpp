@@ -3,7 +3,6 @@
 #include <array>
 #include <algorithm>
 #include <sstream>
-#include <iostream>
 
 namespace Utils
 {
